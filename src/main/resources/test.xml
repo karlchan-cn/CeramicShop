@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<type name="AlarmDialogPanel" extends="forge.ui.core.CustomWidget" xmlns="urn:quest-com:forge-types-1-0">
+	<import>forge.fms.monitor.alarms.AlarmConfiguration</import>
+	<import>forge.ui.core.getSiteNamespace</import>
+	<import>forge.ui.core.searchIndex</import>
+	<set property="visibility">COMMON_ROOT</set>
+	<set property="timestamp">2013-09-26T07:06:23.290Z</set>
+	<set property="state">WARNING</set>
+	<set property="childSpecs">
+		<list>
+			<item>
+				<object>
+					<set property="name"><![CDATA[alarmDialogTitle]]></set>
+					<set property="viewDefinition">forge.ui.core.Label</set>
+					<set property="initialExpressions">
+						<list>
+							<item>
+								<object>
+									<set property="propertyName"><![CDATA[content]]></set>
+									<set property="script"><![CDATA[renderText($alarmDialogTitle, NORMAL)]]></set>
+								</object>
+							</item>
+						</list>
+					</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[background]]></set>
+					<set property="viewDefinition">forge.ui.core.Label</set>
+					<set property="initialExpressions">
+						<list>
+							<item>
+								<object>
+									<set property="propertyName"><![CDATA[allowWrap]]></set>
+									<set property="script"><![CDATA[true]]></set>
+								</object>
+							</item>
+						</list>
+					</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[backTitle]]></set>
+					<set property="viewDefinition">forge.ui.core.Label</set>
+					<set property="initialExpressions">
+						<list>
+							<item>
+								<object>
+									<set property="propertyName"><![CDATA[content]]></set>
+									<set property="script"><![CDATA[renderText($background, NORMAL)]]></set>
+								</object>
+							</item>
+						</list>
+					</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[edit]]></set>
+					<set property="viewDefinition">forge.ui.core.Button</set>
+					<set property="initialExpressions">
+						<list>
+							<item>
+								<object>
+									<set property="propertyName"><![CDATA[content]]></set>
+									<set property="script"><![CDATA[renderText($edit, NORMAL)]]></set>
+								</object>
+							</item>
+						</list>
+					</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[largeTitle]]></set>
+					<set property="viewDefinition">forge.ui.core.Label</set>
+					<set property="initialExpressions">
+						<list>
+							<item>
+								<object>
+									<set property="propertyName"><![CDATA[content]]></set>
+									<set property="script"><![CDATA[renderText($largeTitle, NORMAL)]]></set>
+								</object>
+							</item>
+						</list>
+					</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[largeView]]></set>
+					<set property="viewDefinition">forge.ui.core.Label</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[remediations]]></set>
+					<set property="viewDefinition">forge.ui.core.ListView&lt;Object&gt;</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[remediationsTitle]]></set>
+					<set property="viewDefinition">forge.ui.core.Label</set>
+					<set property="initialExpressions">
+						<list>
+							<item>
+								<object>
+									<set property="propertyName"><![CDATA[content]]></set>
+									<set property="script"><![CDATA[renderText($remediations, NORMAL)]]></set>
+								</object>
+							</item>
+						</list>
+					</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[smallTitle]]></set>
+					<set property="viewDefinition">forge.ui.core.Label</set>
+					<set property="initialExpressions">
+						<list>
+							<item>
+								<object>
+									<set property="propertyName"><![CDATA[content]]></set>
+									<set property="script"><![CDATA[renderText($smallTitle, NORMAL)]]></set>
+								</object>
+							</item>
+						</list>
+					</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[smallView]]></set>
+					<set property="viewDefinition">forge.ui.core.Label</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[suggestions]]></set>
+					<set property="viewDefinition">forge.ui.core.ListView&lt;forge.fms.monitor.alarms.AlarmDiagnosticSuggestion&gt;</set>
+					<set property="initialExpressions">
+						<list>
+							<item>
+								<object>
+									<set property="propertyName"><![CDATA[itemValueClosure]]></set>
+									<set property="script"><![CDATA[item -> renderText(item.label, NORMAL)]]></set>
+								</object>
+							</item>
+						</list>
+					</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[suggestionsTitle]]></set>
+					<set property="viewDefinition">forge.ui.core.Label</set>
+					<set property="initialExpressions">
+						<list>
+							<item>
+								<object>
+									<set property="propertyName"><![CDATA[content]]></set>
+									<set property="script"><![CDATA[renderText($suggestions, NORMAL)]]></set>
+								</object>
+							</item>
+						</list>
+					</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[titleLabel]]></set>
+					<set property="viewDefinition">forge.ui.core.Label</set>
+				</object>
+			</item>
+			<item>
+				<object>
+					<set property="name"><![CDATA[buttonLabel]]></set>
+					<set property="viewDefinition">forge.ui.core.Label</set>
+					<set property="initialExpressions">
+						<list>
+							<item>
+								<object>
+									<set property="propertyName"><![CDATA[content]]></set>
+									<set property="script"><![CDATA[renderText("Test",LINK)]]></set>
+								</object>
+							</item>
+						</list>
+					</set>
+				</object>
+			</item>
+		</list>
+	</set>
+	<set property="listeners">
+		<list>
+			<item>
+				<object type="forge.definitions.PropertyChangeListener">
+					<set property="script"><![CDATA[updateView();]]></set>
+					<set property="propertyName"><![CDATA[alarmConfiguration]]></set>
+				</object>
+			</item>
+			<item>
+				<object type="forge.definitions.EventListener">
+					<set property="script"><![CDATA[EditAlarm dialog = createPopUp();
+dialog.alarmConfiguration = alarmConfiguration;
+dialog.refreshPanelClosure = () -> updateView();
+dialog.show();]]></set>
+					<set property="eventName"><![CDATA[clicked]]></set>
+					<set property="propertyName"><![CDATA[edit]]></set>
+				</object>
+			</item>
+			<item>
+				<object type="forge.definitions.PropertyChangeListener">
+					<set property="script"><![CDATA[String* id = rule.id;
+
+if( id != null ) {
+	List<AlarmConfiguration> configs = [];
+	configs.addAll(searchIndex("forge.fms.monitor.alarms:alarmConfig", [id]));
+	
+	if( !configs.empty ) { 
+		alarmConfiguration = AlarmConfigurationType.retrieveInstance(configs[0]); 
+	} else {
+	
+	/*
+		Namespace ns = getSiteNamespace("forge.rule.administer.alarmdialog"); 
+		AlarmConfiguration newConfig = {
+			name: rule.name,
+			namespace: ns,
+			ruleId: id,
+			relevance: 1,
+			diagnosticSuggestions: []
+		};
+		alarmConfiguration = newConfig;
+	*/
+		alarmConfiguration = {};
+	}
+ }
+]]></set>
+					<set property="propertyName"><![CDATA[rule]]></set>
+				</object>
+			</item>
+		</list>
+	</set>
+	<set property="layout">
+		<object type="forge.definitions.ColumnLayout">
+			<set property="constraint">
+				<object type="forge.definitions.TopLevelConstraint"/>
+			</set>
+			<set property="children">
+				<list>
+					<item>
+						<object type="forge.definitions.RowLayout">
+							<set property="constraint">
+								<object type="forge.definitions.BoxLayoutConstraint">
+									<set property="alignment">STRETCH</set>
+									<set property="weight">1</set>
+								</object>
+							</set>
+							<set property="children">
+								<list>
+									<item>
+										<object type="forge.definitions.ChildRef">
+											<set property="constraint">
+												<object type="forge.definitions.BoxLayoutConstraint">
+													<set property="weight">1</set>
+												</object>
+											</set>
+											<set property="name"><![CDATA[titleLabel]]></set>
+										</object>
+									</item>
+									<item>
+										<object type="forge.definitions.Spacer">
+											<set property="constraint">
+												<object type="forge.definitions.BoxLayoutConstraint">
+													<set property="alignment">STRETCH</set>
+													<set property="weight">1</set>
+												</object>
+											</set>
+										</object>
+									</item>
+									<item>
+										<object type="forge.definitions.ChildRef">
+											<set property="constraint">
+												<object type="forge.definitions.BoxLayoutConstraint">
+													<set property="fixedWidth">35</set>
+													<set property="weight">1</set>
+												</object>
+											</set>
+											<set property="name"><![CDATA[buttonLabel]]></set>
+										</object>
+									</item>
+								</list>
+							</set>
+						</object>
+					</item>
+					<item>
+						<object type="forge.definitions.ChildRef">
+							<set property="constraint">
+								<object type="forge.definitions.BoxLayoutConstraint">
+									<set property="alignment">STRETCH</set>
+								</object>
+							</set>
+							<set property="name"><![CDATA[alarmDialogTitle]]></set>
+							<set property="style">BOX_TITLE</set>
+						</object>
+					</item>
+					<item>
+						<object type="forge.definitions.ColumnLayout">
+							<set property="constraint">
+								<object type="forge.definitions.BoxLayoutConstraint">
+									<set property="fixedWidth">940</set>
+									<set property="weight">1</set>
+									<set property="margins">
+										<object>
+											<set property="left">5</set>
+											<set property="right">5</set>
+											<set property="top">5</set>
+											<set property="bottom">10</set>
+										</object>
+									</set>
+								</object>
+							</set>
+							<set property="children">
+								<list>
+									<item>
+										<object type="forge.definitions.RowLayout">
+											<set property="constraint">
+												<object type="forge.definitions.BoxLayoutConstraint">
+													<set property="fixedHeight">70</set>
+													<set property="alignment">STRETCH</set>
+												</object>
+											</set>
+											<set property="children">
+												<list>
+													<item>
+														<object type="forge.definitions.ColumnLayout">
+															<set property="constraint">
+																<object type="forge.definitions.BoxLayoutConstraint">
+																	<set property="fixedWidth">350</set>
+																</object>
+															</set>
+															<set property="children">
+																<list>
+																	<item>
+																		<object type="forge.definitions.ChildRef">
+																			<set property="constraint">
+																				<object type="forge.definitions.BoxLayoutConstraint">
+																					<set property="alignment">STRETCH</set>
+																				</object>
+																			</set>
+																			<set property="name"><![CDATA[backTitle]]></set>
+																		</object>
+																	</item>
+																	<item>
+																		<object type="forge.definitions.ChildRef">
+																			<set property="constraint">
+																				<object type="forge.definitions.BoxLayoutConstraint">
+																					<set property="fixedWidth">340</set>
+																				</object>
+																			</set>
+																			<set property="name"><![CDATA[background]]></set>
+																		</object>
+																	</item>
+																</list>
+															</set>
+														</object>
+													</item>
+													<item>
+														<object type="forge.definitions.ColumnLayout">
+															<set property="constraint">
+																<object type="forge.definitions.BoxLayoutConstraint">
+																	<set property="fixedWidth">260</set>
+																</object>
+															</set>
+															<set property="children">
+																<list>
+																	<item>
+																		<object type="forge.definitions.ChildRef">
+																			<set property="constraint">
+																				<object type="forge.definitions.BoxLayoutConstraint">
+																					<set property="alignment">STRETCH</set>
+																				</object>
+																			</set>
+																			<set property="name"><![CDATA[suggestionsTitle]]></set>
+																		</object>
+																	</item>
+																	<item>
+																		<object type="forge.definitions.ChildRef">
+																			<set property="constraint">
+																				<object type="forge.definitions.BoxLayoutConstraint">
+																					<set property="alignment">STRETCH</set>
+																				</object>
+																			</set>
+																			<set property="name"><![CDATA[suggestions]]></set>
+																		</object>
+																	</item>
+																</list>
+															</set>
+														</object>
+													</item>
+													<item>
+														<object type="forge.definitions.ColumnLayout">
+															<set property="constraint">
+																<object type="forge.definitions.BoxLayoutConstraint">
+																	<set property="fixedWidth">260</set>
+																</object>
+															</set>
+															<set property="children">
+																<list>
+																	<item>
+																		<object type="forge.definitions.ChildRef">
+																			<set property="constraint">
+																				<object type="forge.definitions.BoxLayoutConstraint">
+																					<set property="alignment">STRETCH</set>
+																				</object>
+																			</set>
+																			<set property="name"><![CDATA[remediationsTitle]]></set>
+																		</object>
+																	</item>
+																	<item>
+																		<object type="forge.definitions.ChildRef">
+																			<set property="constraint">
+																				<object type="forge.definitions.BoxLayoutConstraint">
+																					<set property="alignment">STRETCH</set>
+																				</object>
+																			</set>
+																			<set property="name"><![CDATA[remediations]]></set>
+																		</object>
+																	</item>
+																</list>
+															</set>
+														</object>
+													</item>
+													<item>
+														<object type="forge.definitions.Spacer">
+															<set property="constraint">
+																<object type="forge.definitions.BoxLayoutConstraint">
+																	<set property="alignment">STRETCH</set>
+																	<set property="weight">1</set>
+																</object>
+															</set>
+														</object>
+													</item>
+													<item>
+														<object type="forge.definitions.ColumnLayout">
+															<set property="constraint">
+																<object type="forge.definitions.BoxLayoutConstraint"/>
+															</set>
+															<set property="children">
+																<list>
+																	<item>
+																		<object type="forge.definitions.ChildRef">
+																			<set property="constraint">
+																				<object type="forge.definitions.BoxLayoutConstraint">
+																					<set property="weight">1</set>
+																				</object>
+																			</set>
+																			<set property="name"><![CDATA[edit]]></set>
+																		</object>
+																	</item>
+																	<item>
+																		<object type="forge.definitions.Spacer">
+																			<set property="constraint">
+																				<object type="forge.definitions.BoxLayoutConstraint">
+																					<set property="alignment">STRETCH</set>
+																					<set property="weight">1</set>
+																				</object>
+																			</set>
+																		</object>
+																	</item>
+																</list>
+															</set>
+														</object>
+													</item>
+												</list>
+											</set>
+										</object>
+									</item>
+									<item>
+										<object type="forge.definitions.RowLayout">
+											<set property="constraint">
+												<object type="forge.definitions.BoxLayoutConstraint">
+													<set property="alignment">STRETCH</set>
+												</object>
+											</set>
+											<set property="children">
+												<list>
+													<item>
+														<object type="forge.definitions.ChildRef">
+															<set property="constraint">
+																<object type="forge.definitions.BoxLayoutConstraint">
+																	<set property="alignment">STRETCH</set>
+																	<set property="margins">
+																		<object>
+																			<set property="right">10</set>
+																		</object>
+																	</set>
+																</object>
+															</set>
+															<set property="name"><![CDATA[smallTitle]]></set>
+														</object>
+													</item>
+													<item>
+														<object type="forge.definitions.ChildRef">
+															<set property="constraint">
+																<object type="forge.definitions.BoxLayoutConstraint">
+																	<set property="alignment">STRETCH</set>
+																</object>
+															</set>
+															<set property="name"><![CDATA[smallView]]></set>
+														</object>
+													</item>
+													<item>
+														<object type="forge.definitions.Spacer">
+															<set property="constraint">
+																<object type="forge.definitions.BoxLayoutConstraint">
+																	<set property="alignment">STRETCH</set>
+																	<set property="weight">1</set>
+																</object>
+															</set>
+														</object>
+													</item>
+													<item>
+														<object type="forge.definitions.ChildRef">
+															<set property="constraint">
+																<object type="forge.definitions.BoxLayoutConstraint">
+																	<set property="alignment">STRETCH</set>
+																	<set property="margins">
+																		<object>
+																			<set property="right">10</set>
+																		</object>
+																	</set>
+																</object>
+															</set>
+															<set property="name"><![CDATA[largeTitle]]></set>
+														</object>
+													</item>
+													<item>
+														<object type="forge.definitions.ChildRef">
+															<set property="constraint">
+																<object type="forge.definitions.BoxLayoutConstraint">
+																	<set property="alignment">STRETCH</set>
+																</object>
+															</set>
+															<set property="name"><![CDATA[largeView]]></set>
+														</object>
+													</item>
+													<item>
+														<object type="forge.definitions.Spacer">
+															<set property="constraint">
+																<object type="forge.definitions.BoxLayoutConstraint">
+																	<set property="alignment">STRETCH</set>
+																	<set property="weight">1</set>
+																</object>
+															</set>
+														</object>
+													</item>
+												</list>
+											</set>
+										</object>
+									</item>
+								</list>
+							</set>
+						</object>
+					</item>
+					
+				</list>
+			</set>
+			<set property="style">LIGHT_BORDER</set>
+		</object>
+	</set>
+	<property name="rule" type="forge.rules.administer.Rule">
+		<set property="access">READ_WRITE</set>
+	</property>
+	<property name="alarmConfiguration" type="AlarmConfigurationType">
+		<set property="access">READ_WRITE</set>
+	</property>
+	<method name="updateView" return-type="Void">
+		<set property="abstract">false</set>
+		<script><![CDATA[background.content = renderText(alarmConfiguration.description, NORMAL);
+smallView.content  =   renderText(alarmConfiguration.smallDetailView.name, NORMAL);
+largeView.content =    renderText(alarmConfiguration.largeDetailView.name, NORMAL);
+suggestions.items = alarmConfiguration.diagnosticSuggestions;]]></script>
+	</method>
+</type>

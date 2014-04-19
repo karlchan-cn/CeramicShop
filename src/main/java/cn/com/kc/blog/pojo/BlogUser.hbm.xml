@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.com.kc.blog.pojo">
+	<class name="BlogUser" table="BLOG_USERS">
+		<id name="id" column="ID">
+			<generator class="native" />
+		</id>
+		<property name="userName" type="string" column="USERNAME" />
+		<property name="showName" type="string" column="SHOWNAME" />
+		<property name="password" type="string" column="PASSWORD" />
+		<property name="email" type="string" column="EMAIL" />
+		<property name="createTime" type="timestamp" column="CREATETIME" />
+		<property name="address" type="string" column="ADDRESS" />
+		<property name="phoneNumber" type="string" column="PHONENUMBER" />
+		<property name="validateCode" type="string" column="VALIDATECODE" />
+		<set name="entities" cascade="all-delete-orphan" inverse="true">
+			<key column="userId" />
+			<one-to-many class="BlogEntity" />
+		</set>
+	</class>
+</hibernate-mapping>
+
