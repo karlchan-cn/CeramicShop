@@ -15,7 +15,7 @@
  http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd ">
 
 	<!-- myBattis sql session factory 配置 -->
-	<bean id="sessionFactory"
+	<bean id="hibernateSessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<!-- 数据源 -->
 		<property name="dataSource" ref="dataSource" />
@@ -48,6 +48,6 @@
 
 			</value>
 			<!-- 自动扫描实体对象 tdxy.bean的包结构中存放实体类 -->
-			<property name="packagesToScan" value="tdxy.bean" />
+			<property name="packagesToScan" value="cn.com.grocery.domain" />
 	</bean>
 </beans>

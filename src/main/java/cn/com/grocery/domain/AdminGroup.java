@@ -1,8 +1,19 @@
 package cn.com.grocery.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "admin_group")
 public class AdminGroup {
+	@Id
+	@Column(name = "id")
 	Long id;
+	@Column(name = "name")
 	String name;
+	@Column(name = "type")
 	Integer type;
 
 	public Long getId() {

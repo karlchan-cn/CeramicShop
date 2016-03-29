@@ -45,9 +45,9 @@
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
-			classpath:config/app-dao-jdbc.xml,
-			classpath:config/app-context.xml,
-			classpath:config/app-security.xml
+    		classpath:config/app-context.xml,
+			<!-- classpath:config/app-dao-jdbc.xml,
+			classpath:config/app-security.xml -->
 		</param-value>
   </context-param>
   <listener>

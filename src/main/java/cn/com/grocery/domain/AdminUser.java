@@ -3,18 +3,34 @@
  */
 package cn.com.grocery.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * @author karl
  *
  */
+@Entity
+@Table(name = "admin_user")
 public class AdminUser {
+	@Id
+	@Column(name = "id")
 	private Long id;
+	@Column(name = "user_name")
 	private String userName;
+	@Column(name = "display_name")
 	private String dsiplayName;
+	@Column(name = "groupId")
 	private Long groupId;
+	@Column(name = "password")
 	private String password;
+	@Column(name = "email")
 	private String email;
+	@Column(name = "phone")
 	private String phone;
+	@Column(name = "country")
 	private String country;
 
 	public Long getId() {

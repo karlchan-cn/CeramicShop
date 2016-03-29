@@ -14,9 +14,9 @@
  http://www.springframework.org/schema/mvc
  http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd ">
 	<!-- this is the service object that we want to make transactional -->
-	<context:component-scan base-package="cn.com.kc.blog">
+	<context:component-scan base-package="cn.com.grocery">
 		<context:exclude-filter type="regex"
-			expression="cn.com.kc.blog.controller.service.impl.*" />
+			expression="" />
 	</context:component-scan>
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -29,11 +29,13 @@
 		
 	</bean>
 	<!-- 配置aop切点. -->
+	<!-- 
 	<aop:config>
 		<aop:pointcut id="blogServicePointCut"
 			expression="execution(* cn.com.kc.blog.bl.service..*ServiceImpl.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="blogServicePointCut"></aop:advisor>
 	</aop:config>
+	 -->
 	<!-- 配置变量 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
