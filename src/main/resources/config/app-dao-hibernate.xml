@@ -23,7 +23,8 @@
 			<value>
 				<!-- 设置数据库方言 -->
 				hibernate.dialect=org.hibernate.dialect.MySQLDialect
-				<!-- 设置自动创建|更新|验证数据库表结构 hibernate.hbm2ddl.auto=update -->
+				<!-- 设置自动创建|更新|验证数据库表结构  
+				hibernate.hbm2ddl.auto=-->
 				<!-- 是否在控制台显示sql -->
 				hibernate.show_sql=true
 				<!-- 是否格式化sql，优化显示 -->
@@ -47,7 +48,8 @@
 				javax.persistence.validation.mode=none
 
 			</value>
-			<!-- 自动扫描实体对象 tdxy.bean的包结构中存放实体类 -->
-			<property name="packagesToScan" value="cn.com.grocery.domain" />
+		</property>
+		<!-- 自动扫描实体对象 tdxy.bean的包结构中存放实体类 -->
+		<property name="packagesToScan" value="cn.com.grocery.domain" />
 	</bean>
 </beans>
