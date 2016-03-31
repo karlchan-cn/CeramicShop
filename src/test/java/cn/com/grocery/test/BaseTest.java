@@ -13,6 +13,6 @@ import org.springframework.test.context.ContextConfiguration;
  */
 @RunWith(JUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/app-context.xml" })
-@Rollback(value = true)
+@Rollback(value = false)
 public class BaseTest {
 }

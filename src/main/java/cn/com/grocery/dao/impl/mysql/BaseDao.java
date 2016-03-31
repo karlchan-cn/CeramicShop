@@ -24,7 +24,7 @@ public class BaseDao {
 	 * Autowired 自动装配 相当于get() set()
 	 */
 	@Autowired
-	@Qualifier(value="hibernateSessionFactory")
+	@Qualifier(value = "hibernateSessionFactory")
 	protected SessionFactory sessionFactory;
 
 	/**
@@ -101,14 +101,16 @@ public class BaseDao {
 	 * 
 	 */
 	public void save(Object bean) {
+
+		Session session = getNewSession();
 		try {
-			Session session = getNewSession();
 			session.save(bean);
 			session.flush();
-			session.clear();
-			session.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} finally {
+			if (session != null) {
+				session.clear();
+				session.close();
+			}
 		}
 	}
 

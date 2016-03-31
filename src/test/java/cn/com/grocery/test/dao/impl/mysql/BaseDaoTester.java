@@ -3,9 +3,8 @@
  */
 package cn.com.grocery.test.dao.impl.mysql;
 
-import org.logicalcobwebs.proxool.admin.Admin;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.annotations.Test;
 
 import cn.com.grocery.dao.impl.mysql.BaseDao;
 import cn.com.grocery.domain.AdminUser;
@@ -22,10 +21,11 @@ public class BaseDaoTester extends BaseTest {
 	@Test
 	public void test() {
 		AdminUser user = new AdminUser();
-		user.setUserName("test");
+		user.setUserName("test12");
 		user.setPassword("123");
-		user.setDsiplayName("displayname");
+		user.setDsiplayName("display3");
 		user.setEmail("test@email.com");
+		user.setGroupId(1l);
 		baseDao.save(user);
 		System.out.println(user.getId());
 	}
