@@ -23,8 +23,7 @@
 			<value>
 				<!-- 设置数据库方言 -->
 				hibernate.dialect=org.hibernate.dialect.MySQLDialect
-				<!-- 设置自动创建|更新|验证数据库表结构  
-				hibernate.hbm2ddl.auto=-->
+				<!-- 设置自动创建|更新|验证数据库表结构 hibernate.hbm2ddl.auto= -->
 				<!-- 是否在控制台显示sql -->
 				hibernate.show_sql=true
 				<!-- 是否格式化sql，优化显示 -->
@@ -51,5 +50,11 @@
 		</property>
 		<!-- 自动扫描实体对象 tdxy.bean的包结构中存放实体类 -->
 		<property name="packagesToScan" value="cn.com.grocery.domain" />
+	</bean>
+
+	<!-- 定义事务管理 -->
+	<bean id="hibernateTransactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="hibernateSessionFactory" />
 	</bean>
 </beans>

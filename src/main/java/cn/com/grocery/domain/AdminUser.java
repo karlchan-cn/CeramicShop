@@ -10,12 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+
 /**
  * @author karl
  *
  */
 @Entity
 @Table(name = "admin_user")
+@DynamicInsert(value = true)
 public class AdminUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
