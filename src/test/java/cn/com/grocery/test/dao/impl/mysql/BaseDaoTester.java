@@ -5,6 +5,7 @@ package cn.com.grocery.test.dao.impl.mysql;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.grocery.dao.impl.mysql.BaseDao;
@@ -15,10 +16,12 @@ import cn.com.grocery.test.BaseTest;
  * @author karl
  *
  */
+@Transactional(value = "hibernateTransactionManager")
+@Rollback(value = true)
 public class BaseDaoTester extends BaseTest {
 	@Autowired
 	private BaseDao baseDao;
-	
+
 	@Test
 	public void test() {
 		AdminUser user = new AdminUser();

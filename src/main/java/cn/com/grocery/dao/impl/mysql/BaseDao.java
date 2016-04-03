@@ -101,16 +101,15 @@ public class BaseDao {
 	 * 
 	 */
 	public void save(Object bean) {
-
-		Session session = getNewSession();
+		Session session = getSession();
 		try {
 			session.save(bean);
-			session.flush();
+			// session.flush();
 		} finally {
-			if (session != null) {
-				session.clear();
-				session.close();
-			}
+			// if (session != null) {
+			// session.clear();
+			// session.close();
+			// }
 		}
 	}
 
@@ -135,11 +134,11 @@ public class BaseDao {
 	 * 
 	 */
 	public void delete(Object bean) {
-		Session session = getNewSession();
+		Session session = getSession();
 		session.delete(bean);
-		session.flush();
-		session.clear();
-		session.close();
+//		session.flush();
+//		session.clear();
+//		session.close();
 	}
 
 	/**
@@ -154,11 +153,11 @@ public class BaseDao {
 	 */
 	@SuppressWarnings({ "rawtypes" })
 	public void delete(Class c, String id) {
-		Session session = getNewSession();
+		Session session = getSession();
 		Object obj = session.get(c, id);
-		session.delete(obj);
-		flush();
-		clear();
+//		session.delete(obj);
+//		flush();
+//		clear();
 	}
 
 	/**
