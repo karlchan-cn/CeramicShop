@@ -136,9 +136,9 @@ public class BaseDao {
 	public void delete(Object bean) {
 		Session session = getSession();
 		session.delete(bean);
-//		session.flush();
-//		session.clear();
-//		session.close();
+		// session.flush();
+		// session.clear();
+		// session.close();
 	}
 
 	/**
@@ -155,9 +155,9 @@ public class BaseDao {
 	public void delete(Class c, String id) {
 		Session session = getSession();
 		Object obj = session.get(c, id);
-//		session.delete(obj);
-//		flush();
-//		clear();
+		// session.delete(obj);
+		// flush();
+		// clear();
 	}
 
 	/**
