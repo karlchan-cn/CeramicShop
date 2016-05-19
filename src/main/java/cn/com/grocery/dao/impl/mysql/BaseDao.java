@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * 
  * @Title: BaseDao.java
  * @Package tdxy.dao
- * @Description: TODO(baseDao 数据库操作实现类)
+ * @Description: (baseDao 数据库操作实现类)
  * @author dapeng
  * @date 2014年5月7日 下午5:09:22
  * @version V1.0

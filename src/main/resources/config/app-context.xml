@@ -16,7 +16,7 @@
 	<!-- this is the service object that we want to make transactional -->
 	<context:component-scan base-package="cn.com.grocery">
 		<context:exclude-filter type="regex"
-			expression="" />
+			expression="cn.com.grocery.action.*" />
 	</context:component-scan>
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -42,7 +42,7 @@
 		<property name="locations">
 			<list>
 				<value>classpath:properties/configuration.properties</value>
-				<value>classpath:properties/configuration.properties</value>
+				<!-- <value>classpath:properties/configuration.properties</value> -->
 			</list>
 		</property>
 	</bean>
@@ -73,8 +73,8 @@
 		<property name="minGuarantedStorageDelayInSeconds" 
 			value="180" /> 
 	</bean> -->
-	<import resource="classpath*:config/app-dap-mybatis.xml"/>
-	<import resource="classpath*:config/app-dap-jdbc.xml"/>
+	<import resource="classpath*:config/app-dao-mybatis.xml"/>
+	<import resource="classpath*:config/app-dao-jdbc.xml"/>
 	<import resource="classpath*:config/app-dao-hibernate.xml"/>
 	
 </beans>

@@ -16,10 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
  *
  */
 @Controller
+@RequestMapping(value = { "/admin" })
 public class AdminAction implements InitializingBean {
 	private static final Logger logger = LoggerFactory.getLogger(AdminAction.class);
 
-	@RequestMapping(value = "/admin/index", method = { RequestMethod.GET })
+	@RequestMapping(value = "/index", method = { RequestMethod.GET })
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView("/admin/index");
 		return mav;
@@ -27,7 +28,6 @@ public class AdminAction implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		System.out.println("sjdflkjs");
 
 	}
 }
