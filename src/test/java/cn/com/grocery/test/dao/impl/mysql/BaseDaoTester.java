@@ -27,7 +27,7 @@ public class BaseDaoTester extends BaseTest {
 		AdminUser user = new AdminUser();
 		user.setUserName("test");
 		user.setPassword("123");
-		user.setDsiplayName("display2");
+		user.setDisplayName("display2");
 		user.setEmail("test@email.com");
 		user.setGroupId(1l);
 		baseDao.save(user);
