@@ -15,13 +15,13 @@ public class AdminUserVO {
 
 	private Long id;
 
-	@JSONField( name = "user_name" )
+	@JSONField(name = "user_name")
 	private String userName;
 
-	@JSONField( name = "display_name" )
+	@JSONField(name = "display_name")
 	private String displayName;
 
-	@JSONField( name = "group_id" )
+	@JSONField(name = "group_id")
 	private Long groupId;
 
 	private String password;
@@ -32,17 +32,17 @@ public class AdminUserVO {
 
 	private String country;
 
-	@JSONField( name = "group_name" )
+	@JSONField(name = "group_name")
 	private String groupName;
 
-	@JSONField( name = "group_type" )
+	@JSONField(name = "group_type")
 	private int groupType;
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId( Long id ) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -50,7 +50,7 @@ public class AdminUserVO {
 		return userName;
 	}
 
-	public void setUserName( String userName ) {
+	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
@@ -58,7 +58,7 @@ public class AdminUserVO {
 		return displayName;
 	}
 
-	public void setDisplayName( String displayName ) {
+	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
 
@@ -66,7 +66,7 @@ public class AdminUserVO {
 		return groupId;
 	}
 
-	public void setGroupId( Long groupId ) {
+	public void setGroupId(Long groupId) {
 		this.groupId = groupId;
 	}
 
@@ -74,7 +74,7 @@ public class AdminUserVO {
 		return password;
 	}
 
-	public void setPassword( String password ) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
@@ -82,7 +82,7 @@ public class AdminUserVO {
 		return email;
 	}
 
-	public void setEmail( String email ) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -90,7 +90,7 @@ public class AdminUserVO {
 		return phone;
 	}
 
-	public void setPhone( String phone ) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -98,7 +98,7 @@ public class AdminUserVO {
 		return country;
 	}
 
-	public void setCountry( String country ) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 
@@ -106,7 +106,7 @@ public class AdminUserVO {
 		return groupName;
 	}
 
-	public void setGroupName( String groupName ) {
+	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
 
@@ -114,11 +114,11 @@ public class AdminUserVO {
 		return groupType;
 	}
 
-	public void setGroupType( int groupType ) {
+	public void setGroupType(int groupType) {
 		this.groupType = groupType;
 	}
 
-	public void initFromUser( AdminUser user ) {
+	public void initFromUser(AdminUser user) {
 		this.id = user.getId();
 		this.groupId = user.getGroupId();
 		userName = user.getUserName();

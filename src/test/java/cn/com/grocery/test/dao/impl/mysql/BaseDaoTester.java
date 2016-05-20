@@ -16,8 +16,7 @@ import cn.com.grocery.test.BaseTest;
  * @author karl
  *
  */
-@Transactional(value = "hibernateTransactionManager")
-@Rollback(value = true)
+
 public class BaseDaoTester extends BaseTest {
 	@Autowired
 	private BaseDao baseDao;

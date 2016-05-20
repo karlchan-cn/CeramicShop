@@ -3,7 +3,6 @@ package cn.com.grocery.dao.impl.mysql;
 import java.util.List;
 import java.util.Map;
 
-import org.antlr.grammar.v3.ANTLRParser.throwsSpec_return;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,13 +29,13 @@ public class BaseDao {
 	/**
 	 * Logger
 	 */
-	private static Logger ILOG = LoggerFactory.getLogger( BaseDao.class );
+	private static Logger ILOG = LoggerFactory.getLogger(BaseDao.class);
 
 	/**
 	 * Autowired 自动装配 相当于get() set()
 	 */
 	@Autowired
-	@Qualifier( value = "hibernateSessionFactory" )
+	@Qualifier(value = "hibernateSessionFactory")
 	protected SessionFactory sessionFactory;
 
 	/**
@@ -71,10 +70,10 @@ public class BaseDao {
 	 * @param id
 	 * @return
 	 */
-	@SuppressWarnings( "rawtypes" )
-	public Object load( Class c, String id ) {
+	@SuppressWarnings("rawtypes")
+	public Object load(Class c, String id) {
 		Session session = getSession();
-		return session.get( c, id );
+		return session.get(c, id);
 	}
 
 	/**
@@ -84,45 +83,46 @@ public class BaseDao {
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings( { "rawtypes" } )
-	public List getAllList( Class c ) {
+	@SuppressWarnings({ "rawtypes" })
+	public List getAllList(Class c) {
 		String hql = "from " + c.getName();
 		Session session = getSession();
-		return session.createQuery( hql ).list();
+		return session.createQuery(hql).list();
 	}
 
 	/**
 	 * 分页查询
+	 * 
 	 * @param pager
 	 * @param params
 	 * @return
 	 */
-	@SuppressWarnings( "rawtypes" )
-	public List getListWithPager( Pager pager, Map<String, Object> params ) {
+	@SuppressWarnings("rawtypes")
+	public List getListWithPager(Pager pager, Map<String, Object> params) {
 		Session session = null;
 		List<?> result = null;
 		try {
 			session = getSession();
 			String hql = pager.getHql();// 获取查询语句
-			Query query = session.createQuery( hql ).setCacheable( true );
+			Query query = session.createQuery(hql).setCacheable(true);
 			// 设置参数
-			query.setProperties( params );
+			query.setProperties(params);
 			// 查询具体数据
 			int count = query.list().size();
-			pager.setCount( count );
+			pager.setCount(count);
 			// 设置首页
-			if( pager.getIndex() < 1 ) {
-				pager.setIndex( 1 );
+			if (pager.getIndex() < 1) {
+				pager.setIndex(1);
 			}
 			// 指定从那个对象开始查询，参数的索引位置是从0开始的，
-			query.setFirstResult( ( pager.getIndex() - 1 ) * pager.getPageSize() );
+			query.setFirstResult((pager.getIndex() - 1) * pager.getPageSize());
 			// 分页时，一次最多产寻的对象数
-			query.setMaxResults( pager.getPageCount() );
+			query.setMaxResults(pager.getPageCount());
 			result = query.list();
 
-		} catch( Exception e ) {
-			ILOG.error( e.getMessage(), e );
-			throw new RuntimeException( e );
+		} catch (Exception e) {
+			ILOG.error(e.getMessage(), e);
+			throw new RuntimeException(e);
 		}
 		return result;
 	}
@@ -133,12 +133,17 @@ public class BaseDao {
 	 * @param c
 	 * @return
 	 */
-	@SuppressWarnings( "rawtypes" )
-	public int getTotalCount( Class c, Map<String, Object> params ) {
-		Session session = getNewSession();
-		String hql = "select count(*) from " + c.getName();
-		Integer count = ( Integer )session.createQuery( hql ).setProperties( params ).uniqueResult();
-		session.close();
+	@SuppressWarnings("rawtypes")
+	public int getTotalCount(Class c, Map<String, Object> params) {
+		Integer count = null;
+		try {
+			Session session = getSession();
+			String hql = "select count(*) from " + c.getName();
+			count = Integer.valueOf(session.createQuery(hql).setProperties(params).uniqueResult().toString());
+		} catch (Exception e) {
+			ILOG.error("error" + e.getMessage(), e);
+		}
+
 		return count != null ? count.intValue() : 0;
 	}
 
@@ -148,10 +153,10 @@ public class BaseDao {
 	 * @param bean
 	 * 
 	 */
-	public void save( Object bean ) {
+	public void save(Object bean) {
 		Session session = getSession();
 		try {
-			session.save( bean );
+			session.save(bean);
 			// session.flush();
 		} finally {
 			// if (session != null) {
@@ -167,9 +172,9 @@ public class BaseDao {
 	 * @param bean
 	 * 
 	 */
-	public void update( Object bean ) {
+	public void update(Object bean) {
 		Session session = getNewSession();
-		session.update( bean );
+		session.update(bean);
 		session.flush();
 		session.clear();
 		session.close();
@@ -181,9 +186,9 @@ public class BaseDao {
 	 * @param bean
 	 * 
 	 */
-	public void delete( Object bean ) {
+	public void delete(Object bean) {
 		Session session = getSession();
-		session.delete( bean );
+		session.delete(bean);
 		// session.flush();
 		// session.clear();
 		// session.close();
@@ -199,10 +204,10 @@ public class BaseDao {
 	 *            ID
 	 * 
 	 */
-	@SuppressWarnings( { "rawtypes" } )
-	public void delete( Class c, String id ) {
+	@SuppressWarnings({ "rawtypes" })
+	public void delete(Class c, String id) {
 		Session session = getSession();
-		Object obj = session.get( c, id );
+		Object obj = session.get(c, id);
 		// session.delete(obj);
 		// flush();
 		// clear();
@@ -218,12 +223,12 @@ public class BaseDao {
 	 *            ID 集合
 	 * 
 	 */
-	@SuppressWarnings( { "rawtypes" } )
-	public void delete( Class c, String[] ids ) {
-		for( String id : ids ) {
-			Object obj = getSession().get( c, id );
-			if( obj != null ) {
-				getSession().delete( obj );
+	@SuppressWarnings({ "rawtypes" })
+	public void delete(Class c, String[] ids) {
+		for (String id : ids) {
+			Object obj = getSession().get(c, id);
+			if (obj != null) {
+				getSession().delete(obj);
 			}
 		}
 	}
