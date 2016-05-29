@@ -26,6 +26,12 @@ public class AdminAction implements InitializingBean {
 		return mav;
 	}
 
+	@RequestMapping(value = { "/signin" }, method = { RequestMethod.GET })
+	public ModelAndView signin() {
+		ModelAndView mav = new ModelAndView("/admin/signin");
+		return mav;
+	}
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
 

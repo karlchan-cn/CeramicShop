@@ -90,7 +90,8 @@
 	<mvc:resources mapping="/assets/images/**"
 		location="/WEB-INF/assets/images/,/WEB-INF/assets/images/bootstrap/,/WEB-INF/assets/images/base/,/WEB-INF/assets/upload/images/,/WEB-INF/assets/images/datatables/" />
 	<mvc:resources mapping="/assets/css/**"
-		location="/WEB-INF/assets/css/,/WEB-INF/assets/css/bootstrap/,/WEB-INF/assets/css/common/" />
+		location="/WEB-INF/assets/css/,/WEB-INF/assets/css/bootstrap/,/WEB-INF/assets/css/common/,
+		/WEB-INF/assets/css/login/" />
 	<mvc:resources mapping="/assets/fonts/**" location="/WEB-INF/assets/css/fonts/" />
 	<mvc:resources mapping="/assets/js/**"
 		location="/WEB-INF/assets/js/,/WEB-INF/assets/js/bootstrap/,/WEB-INF/assets/js/jquery/,/WEB-INF/assets/js/fileupload/,/WEB-INF/assets/js/sugar/,/WEB-INF/assets/js/common/,WEB-INF/assets/js/modernizr/,WEB-INF/assets/js/dropzone/,WEB-INF/assets/js/datatables/" />
