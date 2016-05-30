@@ -19,13 +19,13 @@
 			expression="cn.com.grocery.action.*" />
 	</context:component-scan>
 	<!-- 配置数据源 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="${connection.driver_class}"></property>
 		<property name="url" value="${connection.url}"></property>
 		<property name="username" value="${connection.username}"></property>
 		<property name="password" value="${connection.password}"></property>
-		<property name="maxActive" value="${connection.maxActive}"></property>
+		<property name="maxTotal" value="${connection.maxActive}"></property>
 		
 	</bean>
 	<!-- 配置aop切点. -->
@@ -42,7 +42,6 @@
 		<property name="locations">
 			<list>
 				<value>classpath:properties/configuration.properties</value>
-				<!-- <value>classpath:properties/configuration.properties</value> -->
 			</list>
 		</property>
 	</bean>

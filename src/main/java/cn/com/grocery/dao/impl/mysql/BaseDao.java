@@ -1,8 +1,10 @@
 package cn.com.grocery.dao.impl.mysql;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -134,11 +136,12 @@ public class BaseDao {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public int getTotalCount(Class c, Map<String, Object> params) {
+	public int getTotalCount(Class c, Map<String, Object> params, String hqlFilter) {
 		Integer count = null;
 		try {
 			Session session = getSession();
-			String hql = "select count(*) from " + c.getName();
+			String hql = "select count(*) from " + c.getName()
+					+ StringUtils.defaultString(hqlFilter, StringUtils.EMPTY);
 			count = Integer.valueOf(session.createQuery(hql).setProperties(params).uniqueResult().toString());
 		} catch (Exception e) {
 			ILOG.error("error" + e.getMessage(), e);
@@ -153,10 +156,10 @@ public class BaseDao {
 	 * @param bean
 	 * 
 	 */
-	public void save(Object bean) {
+	public Serializable save(Object bean) {
 		Session session = getSession();
 		try {
-			session.save(bean);
+			return session.save(bean);
 			// session.flush();
 		} finally {
 			// if (session != null) {

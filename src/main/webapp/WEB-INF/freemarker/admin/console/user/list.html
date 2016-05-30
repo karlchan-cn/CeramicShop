@@ -1,0 +1,33 @@
+<@override name="admin-content">
+
+<h2 class="sub-header">用户列表</h2>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>名称</th>
+				<th>分组</th>
+				<th>邮箱</th>
+				<th>电话号码</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<#if users?? && users?size &gt; 0>
+				<#list users as user>
+					<tr>
+					<td>${user_index + 1}</td>
+					<td>${user.userName}</td>
+					<td>${user.userName}</td>
+					<td>${user.email}</td>
+					<td>${user.phone}</td>
+				</tr>
+				</#list>
+			</#if>
+		</tbody>
+	</table>
+</div>
+
+</@override>
+<@extends name="/admin/master-admin.html"/>

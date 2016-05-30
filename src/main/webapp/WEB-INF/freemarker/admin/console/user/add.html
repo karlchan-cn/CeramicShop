@@ -1,0 +1,71 @@
+<@override name="admin-content">
+<div class="page-header">
+	<h1>
+		新增用户 <small></small>
+	</h1>
+</div>
+<div class="panel panel-success">
+	<div class="panel-body">
+		<form action="save" method="POST">
+			<input type="hidden" value="${user_token}" name="userToken"
+				id="user_token">
+			<div class="form-group">
+				<label for="exampleInputEmail1">用户邮箱</label> <input type="email"
+					class="form-control" id="email" name="email" placeholder="邮箱">
+			</div>
+			<div class="form-group">
+				<label for="exampleInputEmail1">用户名</label> <input type="text"
+					class="form-control" id="userName" name="userName"  placeholder="用户名">
+			</div>
+			<div class="form-group">
+				<label for="exampleInputPassword1">密码</label> <input type="password"
+					class="form-control" id="password" name="password" placeholder="密码">
+			</div>
+			<div class="form-group">
+				<img id="img_review" src="" class="img-responsive"
+					alt="Responsive image" style="display: none;" name=""> <label
+					for="exampleInputFile">头像</label> <input type="file"
+					id="fileupload" name="files"> <input type="hidden"
+					name="icon" id="icon">
+				<p id="upload-tip" class="help-block">上传头像.</p>
+			</div>
+			<div class="has-error">
+				<span id="helpBlock" class="help-block has-error">
+					${error_msg}</span>
+			</div>
+			<button type="submit" class="btn btn-default">新增</button>
+		</form>
+	</div>
+
+</div>
+
+
+</@override> <@override name="script_ext_page_end">
+<script type="text/javascript"
+	src="/assets/js/fileupload/jquery.ui.widget.js"></script>
+<script type="text/javascript"
+	src="/assets/js/fileupload/jquery.iframe-transport.js"></script>
+<script type="text/javascript"
+	src="/assets/js/fileupload/jquery.fileupload.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#fileupload').fileupload(
+				{
+					dataType : 'json',
+					url : "/admin/console/common/upload/user/icon",
+					maxFileSize : 5000,
+					done : function(e, data) {
+						$.each(data.result, function(index, file) {
+							$("#upload-tip").text(file.name);
+							$("#icon").val(file.savedName);
+							$("#img_review").attr(
+									"src",
+									"/admin/console/common/image/view?name="
+											+ file.savedName).css("display",
+									"block");
+						});
+					}
+				});
+	});
+</script>
+</@override> <@extends name="/admin/master-admin.html"/>

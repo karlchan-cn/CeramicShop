@@ -2,7 +2,7 @@
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
     <appender name="SERVER" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="/data/log/jetty/app-server.log"/>
+        <param name="File" value="/data/log/jetty/ceramic-server.log"/>
         <param name="Append" value="true"/>
         <param name="DatePattern" value="'.'yyyyMMdd"/>
         <layout class="org.apache.log4j.PatternLayout">
@@ -14,7 +14,7 @@
         </filter>
     </appender>
     <appender name="ERROR" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="File" value="/data/log/jetty/app-error.log"/>
+        <param name="File" value="/data/log/jetty/ceramic-error.log"/>
         <param name="Append" value="true"/>
         <param name="DatePattern" value="'.'yyyyMMdd"/>
         <layout class="org.apache.log4j.PatternLayout">

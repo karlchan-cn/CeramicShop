@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+.sidebar .nav .nav {
+	display: none;
+	padding-bottom: 10px;
+}
+
+.sidebar .nav>.active>ul {
+	display: block;
+	padding-left: 15px;
+}
+
+.sidebar .nav>.active>ul>li>a {
+	padding-left: 15px;
+}

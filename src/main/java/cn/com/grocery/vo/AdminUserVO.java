@@ -32,6 +32,16 @@ public class AdminUserVO {
 
 	private String country;
 
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	private String icon;
+
 	@JSONField(name = "group_name")
 	private String groupName;
 
@@ -118,6 +128,16 @@ public class AdminUserVO {
 		this.groupType = groupType;
 	}
 
+	public void initToUser(AdminUser user) {
+		user.setUserName(this.getUserName());
+		user.setDisplayName(this.getDisplayName());
+		user.setEmail(this.getEmail());
+		user.setPassword(this.getPassword());
+		user.setPhone(this.getPhone());
+		user.setCountry(this.getCountry());
+		user.getIcon();
+	}
+
 	public void initFromUser(AdminUser user) {
 		this.id = user.getId();
 		this.groupId = user.getGroupId();
@@ -127,6 +147,7 @@ public class AdminUserVO {
 		email = user.getEmail();
 		phone = user.getPhone();
 		country = user.getCountry();
+		setIcon(user.getIcon());
 	}
 
 }

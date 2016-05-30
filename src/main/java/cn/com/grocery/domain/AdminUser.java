@@ -17,41 +17,52 @@ import org.hibernate.annotations.DynamicInsert;
  *
  */
 @Entity
-@Table( name = "admin_user" )
-@DynamicInsert( value = true )
+@Table(name = "admin_user")
+@DynamicInsert(value = true)
 public class AdminUser {
 
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	@Column( name = "id" )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
 
-	@Column( name = "user_name" )
+	@Column(name = "user_name")
 	private String userName;
 
-	@Column( name = "display_name" )
+	@Column(name = "display_name")
 	private String displayName;
 
-	@Column( name = "groupId", nullable = true )
+	@Column(name = "groupId", nullable = true)
 	private Long groupId;
 
-	@Column( name = "password" )
+	@Column(name = "password")
 	private String password;
 
-	@Column( name = "email" )
+	@Column(name = "email")
 	private String email;
 
-	@Column( name = "phone" )
+	@Column(name = "phone")
 	private String phone;
 
-	@Column( name = "country" )
+	@Column(name = "country")
 	private String country;
+
+	@Column(name = "icon")
+	private String icon;
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId( Long id ) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -59,7 +70,7 @@ public class AdminUser {
 		return userName;
 	}
 
-	public void setUserName( String userName ) {
+	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
@@ -67,7 +78,7 @@ public class AdminUser {
 		return displayName;
 	}
 
-	public void setDisplayName( String displayName ) {
+	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
 
@@ -75,7 +86,7 @@ public class AdminUser {
 		return groupId;
 	}
 
-	public void setGroupId( Long groupId ) {
+	public void setGroupId(Long groupId) {
 		this.groupId = groupId;
 	}
 
@@ -83,7 +94,7 @@ public class AdminUser {
 		return password;
 	}
 
-	public void setPassword( String password ) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
@@ -91,7 +102,7 @@ public class AdminUser {
 		return email;
 	}
 
-	public void setEmail( String email ) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -99,7 +110,7 @@ public class AdminUser {
 		return phone;
 	}
 
-	public void setPhone( String phone ) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -107,7 +118,7 @@ public class AdminUser {
 		return country;
 	}
 
-	public void setCountry( String country ) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 

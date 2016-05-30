@@ -20,7 +20,7 @@
 	<!-- <mvc:annotation-driven validator="hibernateBeanValidator" conversion-service="conversion-service"> 
 		</mvc:annotation-driven> -->
 	<!-- annotation-driven的所有展开元素 -->
-
+	<mvc:annotation-driven />
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
 		<property name="order" value="0" />
@@ -36,7 +36,7 @@
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
 
 	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 		<property name="messageConverters">
 			<list>
 				<ref bean="byteArray_hmc" />
@@ -52,9 +52,30 @@
 	<bean id="byteArray_hmc"
 		class="org.springframework.http.converter.ByteArrayHttpMessageConverter" /><!-- 
 		处理.. -->
+	<!-- response body's encoding problem -->
+	<bean name="utf8Charset" class="java.nio.charset.Charset"
+		factory-method="forName">
+		<constructor-arg value="UTF-8"></constructor-arg>
+	</bean>
 	<bean id="string_hmc"
-		class="org.springframework.http.converter.StringHttpMessageConverter" /><!-- 
-		处理.. -->
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<constructor-arg ref="utf8Charset">
+		</constructor-arg>
+		<property name="supportedMediaTypes">
+			<list>
+				<bean class="org.springframework.http.MediaType">
+					<constructor-arg value="text" />
+					<constructor-arg value="plain" />
+					<constructor-arg value="UTF-8" />
+				</bean>
+				<bean class="org.springframework.http.MediaType">
+					<constructor-arg value="application" />
+					<constructor-arg value="json" />
+					<constructor-arg value="UTF-8" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 	<bean id="resource_hmc"
 		class="org.springframework.http.converter.ResourceHttpMessageConverter" /><!-- 
 		处理.. -->
@@ -78,8 +99,12 @@
 
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/admin/*" />
-			<bean class="cn.com.grocery.interceptor.TestInterceptor" />
+			<mvc:mapping path="/admin/console/**" />
+			<bean class="cn.com.grocery.interceptor.AdminLoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/console/**" />
+			<bean class="cn.com.grocery.interceptor.AdminMenuModuleIterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 
@@ -139,8 +164,6 @@
 	<!-- json view -->
 	<bean id="defaultJsonView"
 		class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
-	<!-- 文件上传相关 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> 
-		<property name="maxUploadSize" value="100000"/> </bean> -->
 
 	<!-- Freemarker配置 -->
 	<bean id="freemarkerConfig"
@@ -173,6 +196,13 @@
 		class="cn.org.rapid_framework.freemarker.directive.OverrideDirective" />
 	<bean id="superDirective"
 		class="cn.org.rapid_framework.freemarker.directive.SuperDirective" />
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<!-- 指定所上传文件的总大小不能超过200KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+		<property name="maxUploadSize" value="5000000" />
+	</bean>
 
 
 
