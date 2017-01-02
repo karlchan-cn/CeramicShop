@@ -1,7 +1,11 @@
 /**
  * 
  */
-package cn.com.grocery.vo;
+package cn.com.grocery.admin.vo;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
@@ -14,16 +18,22 @@ import cn.com.grocery.domain.AdminUser;
 public class AdminUserVO {
 
 	private Long id;
-
+	@Max(16)
+	@Min(1)
+	@NotNull()
 	@JSONField(name = "user_name")
 	private String userName;
-
+	@Max(16)
+	@Min(1)
+	@NotNull
 	@JSONField(name = "display_name")
 	private String displayName;
 
 	@JSONField(name = "group_id")
 	private Long groupId;
-
+	@Max(16)
+	@Min(1)
+	@NotNull
 	private String password;
 
 	private String email;

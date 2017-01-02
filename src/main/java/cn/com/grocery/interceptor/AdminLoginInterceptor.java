@@ -48,7 +48,6 @@ public class AdminLoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		// TODO Auto-generated method stub
 		super.afterCompletion(request, response, handler, ex);
 	}
 

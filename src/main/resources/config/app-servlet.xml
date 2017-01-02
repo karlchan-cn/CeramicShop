@@ -17,14 +17,10 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 	<!-- 自动注册 validator conversionService -->
-	<!-- <mvc:annotation-driven validator="hibernateBeanValidator" conversion-service="conversion-service"> 
-		</mvc:annotation-driven> -->
+
 	<!-- annotation-driven的所有展开元素 -->
 	<mvc:annotation-driven />
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-		<property name="order" value="0" />
-	</bean>
+	
 	<!-- 以下 validator ConversionService 在使用 mvc:annotation-driven 会 自动注册 -->
 	<bean id="hibernateBeanValidator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
@@ -83,7 +79,7 @@
 		class="org.springframework.http.converter.xml.SourceHttpMessageConverter" /><!-- 
 		处理.. -->
 	<bean id="xmlAwareForm_hmc"
-		class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" /><!-- 
+		class="org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter" /><!-- 
 		处理.. -->
 	<bean id="jaxb2RootElement_hmc"
 		class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" /><!-- 
@@ -137,29 +133,7 @@
 		<property name="exposeSpringMacroHelpers" value="true" />
 	</bean>
 	<!-- ========================= VIEW定义 ========================= -->
-	<!-- bean name view resolver -->
 
-	<!-- <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" 
-		p:order="1" /> -->
-
-	<!-- 根据客户端的不同的请求决定不同的 view进行响应, 如 /blog/1.json /blog/1.xml -->
-
-	<!-- <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" 
-		p:order="2"> 设置为true以忽略对Accept Header的支持 扩展名至mimeType的映射,即 /user.json => 
-		application/json <property name="favorPathExtension" value="false" /> 用于开启 
-		/userinfo/123?format=json 的支持 <property name="favorParameter" value="false" 
-		/> favorPathExtension, favorParameter是true时才起作用 <property name="mediaTypes"> 
-		<map> <entry key="wml" value="text/vnd.wap.wml"/> <entry key="vnd" value="application/vnd.wap.xhtml+xml"/> 
-		<entry key="xhtml" value="application/xhtml+xml"/> <entry key="atom" value="application/atom+xml" 
-		/> <entry key="html" value="text/html" /> <entry key="json" value="application/json" 
-		/> </map> </property> <property name="viewResolvers"> <list> <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" 
-		/> <property name="contentType" value="text/html" /> <property name="prefix" 
-		value="/WEB-INF/pages/" /> <property name="suffix" value=".jsp" /> </bean> 
-		<bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" 
-		/> </list> </property> 可配置Not Found url <property name="defaultViews"> <list> 
-		<bean class="org.springframework.web.servlet.view.JstlView" p:url="/notfound"/> 
-		</list> </property> </bean> -->
 
 	<!-- json view -->
 	<bean id="defaultJsonView"

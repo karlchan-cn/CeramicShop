@@ -1,4 +1,4 @@
-package cn.com.grocery.vo;
+package cn.com.grocery.admin.vo;
 
 public class GroceryEntityVO {
 	private int id;

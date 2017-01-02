@@ -3,8 +3,8 @@
  */
 package cn.com.grocery.util;
 
+import cn.com.grocery.admin.vo.GroceryEntityVO;
 import cn.com.grocery.domain.GroceryEntity;
-import cn.com.grocery.vo.GroceryEntityVO;
 
 /**
  * @author karl

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package cn.com.grocery.vo;
+package cn.com.grocery.admin.vo;
 
 /**
  * @author karl

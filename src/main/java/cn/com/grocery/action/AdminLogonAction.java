@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.testng.collections.Maps;
 
+import cn.com.grocery.admin.vo.AdminUserVO;
 import cn.com.grocery.common.Pager;
 import cn.com.grocery.domain.AdminUser;
 import cn.com.grocery.service.AdminUserManageService;
-import cn.com.grocery.vo.AdminUserVO;
 
 /**
  * @author karl

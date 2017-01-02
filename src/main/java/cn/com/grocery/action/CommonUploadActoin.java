@@ -29,7 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONArray;
 
-import cn.com.grocery.vo.UploadItemVo;
+import cn.com.grocery.admin.vo.UploadItemVo;
 
 /**
  * @author karl

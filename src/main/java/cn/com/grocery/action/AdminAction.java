@@ -25,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(value = { "/admin/console/" })
 public class AdminAction implements InitializingBean {
-	private static final Logger logger = LoggerFactory.getLogger(AdminAction.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AdminAction.class);
 
 	/**
 	 * @return
@@ -34,7 +34,7 @@ public class AdminAction implements InitializingBean {
 	@RequestMapping(value = "/index", method = { RequestMethod.GET })
 	public ModelAndView index() throws InterruptedException {
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				try {
@@ -47,14 +47,15 @@ public class AdminAction implements InitializingBean {
 		ModelAndView mav = new ModelAndView("/admin/console/index");
 		return mav;
 	}
+
 	public static void main(String[] args) throws ClientProtocolException, IOException {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		int idx = 0;
-		for(;idx < 3000;idx++){
+		for (; idx < 3000; idx++) {
 			HttpGet httpGet = new HttpGet("http://localhost:8090/admin/console/index");
 			CloseableHttpResponse response1 = httpclient.execute(httpGet);
 			response1.close();
-		}		
+		}
 	}
 
 	@Override

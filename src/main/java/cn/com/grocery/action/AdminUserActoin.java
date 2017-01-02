@@ -9,25 +9,33 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.validator.routines.EmailValidator;
+import org.codehaus.jackson.map.annotate.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.testng.collections.Maps;
 
+import cn.com.grocery.admin.vo.AdminUserVO;
+import cn.com.grocery.admin.vo.validator.AdminUserVOValidator;
+import cn.com.grocery.common.ApiResult;
 import cn.com.grocery.common.Pager;
 import cn.com.grocery.domain.AdminUser;
 import cn.com.grocery.service.AdminUserManageService;
-import cn.com.grocery.vo.AdminUserVO;
 
 /**
  * @author karl
@@ -74,7 +82,9 @@ public class AdminUserActoin {
 				.setAttribute("se_user_token", token);
 		result.addObject("user_token", token);
 	}
-
+	@Autowired()
+	@Qualifier("messageSource")
+	private MessageSource messageSource;
 	@RequestMapping("/list")
 	public ResponseEntity<List<AdminUserVO>> list(HttpServletRequest request, HttpServletResponse response,
 			Pager pager) {
@@ -91,34 +101,42 @@ public class AdminUserActoin {
 		return result;
 	}
 
+//	@InitBinder
+//	public void initBinder(WebDataBinder binder) {
+//		binder.setValidator(new AdminUserVOValidator());
+//	}
+
 	@RequestMapping("/save")
-	public ModelAndView saveUser(HttpServletRequest request, HttpServletResponse response, AdminUserVO user,
-			String userToken) {
+	@JsonView(ApiResult.class)
+	@ResponseBody
+	public ApiResult<AdminUserVO> saveUser(HttpServletRequest request, HttpServletResponse response,
+			@Valid @ModelAttribute AdminUserVO user, BindingResult bindingResult, String userToken) {
 		ModelAndView result = new ModelAndView();
 		StringBuilder ermsgSb = new StringBuilder();
-		Object sesToken = request.getSession().getAttribute("se_user_token");
-		if (!StringUtils.equals(sesToken == null ? null : sesToken.toString(), userToken))
-			ermsgSb.append("请勿重复提交。");
-		if (StringUtils.isBlank(user.getUserName()) || user.getUserName().length() > CONST_USERNAME_MAX_SIZE)
-			ermsgSb.append("用户不能为空/不合法。");
-		if (StringUtils.isBlank(user.getDisplayName()) || user.getDisplayName().length() > CONST_USERNAME_MAX_SIZE)
-			ermsgSb.append("显示名称不能为空/不合法。");
-		if (StringUtils.isBlank(user.getPassword()))
-			ermsgSb.append("密码不能为空。");
-		if (!EmailValidator.getInstance().isValid(user.getEmail()))
-			ermsgSb.append("email不合法。");
-		if (ermsgSb.length() > 0) {
+		// TODO use other validate token framework
+		// Object sesToken = request.getSession().getAttribute("se_user_token");
+		// if (!StringUtils.equals(sesToken == null ? null :
+		// sesToken.toString(), userToken))
+		// ermsgSb.append("请勿重复提交。");
+		//
+		ApiResult<AdminUserVO> apiRet = new ApiResult<AdminUserVO>();
+		if (bindingResult.getErrorCount() > 0) {
 			result.setViewName("/admin/console/user/add");
 			setToken(result, request);
-			result.addObject("error_msg", ermsgSb.toString());
-		} else {
-			AdminUser u = new AdminUser();
-			user.initToUser(u);
-			u.setPassword(adminUserManageService.securePassword(u.getPassword()));
-			adminUserManageService.saveUser(u);
-			result.setViewName("/admin/console/user/add");
+			result.addObject("error_msg", bindingResult.getAllErrors().toString());
+			//result.addObject("error_msg", ermsgSb.toString());
+			//apiRet.setMessage(bindingResult.getAllErrors().toString());
+			apiRet.setMessage("测试中文乱码");
+			return apiRet;
 		}
-		return result;
+
+		AdminUser u = new AdminUser();
+		user.initToUser(u);
+		u.setPassword(adminUserManageService.securePassword(u.getPassword()));
+		adminUserManageService.saveUser(u);
+		result.setViewName("/admin/console/user/add");
+		//return result;
+		return null;
 	}
 
 	public static void main(String[] args) {
