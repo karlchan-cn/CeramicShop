@@ -3,9 +3,10 @@
  */
 package cn.com.grocery.admin.vo;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
@@ -18,24 +19,25 @@ import cn.com.grocery.domain.AdminUser;
 public class AdminUserVO {
 
 	private Long id;
-	@Max(16)
-	@Min(1)
+
 	@NotNull()
+	@Length(max = 12, min = 1)
 	@JSONField(name = "user_name")
 	private String userName;
-	@Max(16)
-	@Min(1)
+
 	@NotNull
 	@JSONField(name = "display_name")
+	@Length(max = 10, min = 1)
 	private String displayName;
 
 	@JSONField(name = "group_id")
 	private Long groupId;
-	@Max(16)
-	@Min(1)
-	@NotNull
-	private String password;
 
+	@NotNull
+	@Length(max = 30, min = 1)
+	private String password;
+	@Email()
+	@Length(max = 35, min = 1)
 	private String email;
 
 	private String phone;
