@@ -10,30 +10,31 @@
 			<input type="hidden" value="${user_token}" name="userToken"
 				id="user_token">
 			<div class="form-group">
-				<label for="exampleInputEmail1">用户邮箱</label> <input type="email"
+				<label for="email">用户邮箱</label> <input type="email"
 					class="form-control" id="email" name="email" placeholder="邮箱">
 			</div>
+
 			<div class="form-group">
-				<label for="exampleInputEmail1">用户名</label> <input type="text"
-					class="form-control" id="userName" name="userName"
-					placeholder="用户名">
+				<label for="displayName">显示名称</label> <input type="text"
+					class="form-control" id="displayName" name="displayName"
+					placeholder="显示名称">
 			</div>
 			<div class="form-group">
-				<label for="exampleInputPassword1">密码</label> <input type="password"
+				<label for="password">密码</label> <input type="password"
 					class="form-control" id="password" name="password" placeholder="密码">
 			</div>
 			<div class="form-group">
 				<img id="img_review" src="" class="img-responsive"
 					alt="Responsive image" style="display: none;" name=""> <label
-					for="exampleInputFile">头像</label> <input type="file"
-					id="fileupload" name="files"> <input type="hidden"
-					name="icon" id="icon">
+					for="fileupload">头像</label> <input type="file" id="fileupload"
+					name="files"> <input type="hidden" name="icon" id="icon">
 				<p id="upload-tip" class="help-block">上传头像.</p>
 			</div>
 			<div class="has-error">
 				<span id="helpBlock" class="help-block has-error">
 					${error_msg}</span>
 			</div>
+			<input type="hidden" name="uploadFileType" value="11"></input>
 			<button type="button" id="submit_but" class="btn btn-default">新增</button>
 		</form>
 	</div>
@@ -55,8 +56,12 @@
 				type : 'post',
 				url : '/admin/console/user/save',
 				data : $("#user_info_form").serialize(),
-				success : function(data) {
-					
+				success : function(result) {
+					if (result.code != 0) {
+						$("#helpBlock").text(result.message);
+					} else if (result.code == 0) {
+						window.location = "/";
+					}
 				}
 			});
 		});
@@ -66,15 +71,14 @@
 					url : "/admin/console/common/upload/user/icon",
 					maxFileSize : 5000,
 					done : function(e, data) {
-						$.each(data.result, function(index, file) {
-							$("#upload-tip").text(file.name);
-							$("#icon").val(file.savedName);
-							$("#img_review").attr(
-									"src",
-									"/admin/console/common/image/view?name="
-											+ file.savedName).css("display",
-									"block");
-						});
+						var pic = data.result.pics[0];
+						$("#upload-tip").text(pic.name);
+						$("#icon").val(pic.savedName);
+						$("#img_review").attr(
+								"src",
+								"/admin/console/common/image/view?type=11&name="
+										+ pic.savedName)
+								.css("display", "block");
 					}
 				});
 	});

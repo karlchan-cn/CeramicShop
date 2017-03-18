@@ -25,11 +25,6 @@ public class AdminUserVOValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		AdminUserVO user = (AdminUserVO) target;
-
-		if (StringUtils.isBlank(user.getUserName())
-				|| user.getUserName().length() > VOConstants.ADMIN_USERNAME_MAX_SIZE) {
-
-		}
 		if (StringUtils.isBlank(user.getDisplayName())
 				|| user.getDisplayName().length() > VOConstants.ADMIN_USERNAME_MAX_SIZE) {
 			// errors.reject(VOConstants.CODE_ADMIN_NAME_OVER_MAX_LENGTH, "");

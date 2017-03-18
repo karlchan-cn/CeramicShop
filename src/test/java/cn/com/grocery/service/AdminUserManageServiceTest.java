@@ -32,7 +32,6 @@ public class AdminUserManageServiceTest extends BaseTest {
 		AdminUser user = new AdminUser();
 		user.setIcon("icon");
 		user.setPassword(service.securePassword("test"));
-		user.setUserName("test");
 		user.setDisplayName("test");
 		service.saveUser(user);
 	}

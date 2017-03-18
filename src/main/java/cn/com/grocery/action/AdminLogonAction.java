@@ -43,7 +43,7 @@ public class AdminLogonAction {
 	public String login(AdminUserVO vo, HttpServletRequest req,
 			@RequestParam(name = "redirect", required = false) String redirect) {
 		Map<String, Object> param = Maps.newHashMap();
-		param.put("email", vo.getUserName());
+		param.put("email", vo.getEmail());
 		param.put("password", adminUserManageService.securePassword(vo.getPassword()));
 		Pager pager = new Pager();
 		pager.setHql("from AdminUser where email = :email and password = :password");

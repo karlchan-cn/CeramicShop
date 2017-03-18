@@ -4,7 +4,9 @@
 /example.log.1
 /.DS_Store
 /target
-/.settings/
+/.settings
+/.settings/*
 /error.log
 /.gitignore
 /test-output/
+.project

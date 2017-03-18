@@ -6,6 +6,7 @@ package cn.com.grocery.test.dao.impl.mysql;
 import java.util.Map;
 
 import org.junit.Test;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.collections.Maps;
 
@@ -25,6 +26,8 @@ public class BaseDaoTest extends BaseTest {
 
 	@Test
 	public void testCount() {
+//		ReflectionTestUtils.inv
+//		AopUtils.
 		Map<String, Object> params = Maps.newHashMap();
 		params.put("userName", "admin");
 		Assert.assertEquals(baseDao.getTotalCount(AdminUser.class, params, " where userName = :userName "), 1);
@@ -33,7 +36,6 @@ public class BaseDaoTest extends BaseTest {
 	@Test
 	public void test() {
 		AdminUser user = new AdminUser();
-		user.setUserName("test");
 		user.setPassword("123");
 		user.setDisplayName("display2");
 		user.setEmail("test@email.com");

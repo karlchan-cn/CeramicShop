@@ -26,9 +26,6 @@ public class AdminUser {
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "user_name")
-	private String userName;
-
 	@Column(name = "display_name")
 	private String displayName;
 
@@ -64,14 +61,6 @@ public class AdminUser {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getDisplayName() {

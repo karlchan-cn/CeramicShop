@@ -26,10 +26,10 @@
 		<property name="username" value="${connection.username}"></property>
 		<property name="password" value="${connection.password}"></property>
 		<property name="maxTotal" value="${connection.maxActive}"></property>
-		
+
 	</bean>
-	
-	 
+
+
 	<!-- 配置变量 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -47,29 +47,26 @@
 				<!-- 在web环境中一定要定位到classpath 否则默认到当前web应用下找 -->
 				<value>classpath:messages/messages</value>
 				<value>classpath:messages/messages_zh_CN</value>
+				<value>classpath:messages/messages_en_US</value>
+				
 			</list>
 		</property>
-		<!--<property name="defaultEncoding" value="UTF-8" /> <property name="cacheSeconds" 
-			value="60" /> -->
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="cacheSeconds" value="60" />
 	</bean>
-	
+
 	<bean id="localeResolver"
-	class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
-	
-	
+		class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
+
+
 	<!-- Jcaptcha相关的配置 -->
 	<!-- 默认生成的图片180秒过期 , 可另行设置 -->
-	<!--  
-	<bean id="jcaptchaService"
-		class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService">
-		<property name="captchaEngine">
-			<bean class="cn.com.kc.blog.userauthenfilter.impl.GMailEngine" />
-		</property>
-		<property name="minGuarantedStorageDelayInSeconds" 
-			value="180" /> 
-	</bean> -->
-	<import resource="classpath*:config/app-dao-mybatis.xml"/>
-	<import resource="classpath*:config/app-dao-jdbc.xml"/>
-	<import resource="classpath*:config/app-dao-hibernate.xml"/>
-	
+	<!-- <bean id="jcaptchaService" class="com.octo.captcha.service.image.DefaultManageableImageCaptchaService"> 
+		<property name="captchaEngine"> <bean class="cn.com.kc.blog.userauthenfilter.impl.GMailEngine" 
+		/> </property> <property name="minGuarantedStorageDelayInSeconds" value="180" 
+		/> </bean> -->
+	<import resource="classpath*:config/app-dao-mybatis.xml" />
+	<import resource="classpath*:config/app-dao-jdbc.xml" />
+	<import resource="classpath*:config/app-dao-hibernate.xml" />
+
 </beans>

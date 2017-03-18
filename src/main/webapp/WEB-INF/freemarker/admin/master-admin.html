@@ -37,15 +37,15 @@
 				<!--  <span class="sr-only">(current)</span> -->
 				</a>
 				</li>
-				<li><a href="#">瓷砖 ${moduleName}</a></li>
+				<li><a href="#">瓷砖</a></li>
 				<li><a href="#">洁具</a></li>
 				<li><a href="#">粮油</a>
 				</li>
 			</ul>
 			<ul class="nav nav-sidebar">
 				<li <#if moduleName?contains('user')>class="active"</#if> >
-				<a href="/admin/console/user/manage">用户管理</a>
-				<ul class="nav">
+				<a href="/admin/console/user/manage">用户管理 </a>
+				<ul class="nav" <#if moduleName?contains('user-add')>class="active"</#if> >
 					<li><a href="/admin/console/user/add">新增</a></li>
 				</ul>
 				</li>

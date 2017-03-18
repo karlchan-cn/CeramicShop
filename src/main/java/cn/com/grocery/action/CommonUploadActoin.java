@@ -24,12 +24,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.alibaba.fastjson.JSONArray;
 
 import cn.com.grocery.admin.vo.UploadItemVo;
+import cn.com.grocery.common.constants.enums.UploadFileTypeEnums;
 
 /**
  * @author karl
@@ -44,9 +46,13 @@ public class CommonUploadActoin {
 	private static final Logger LOG = LoggerFactory.getLogger(CommonUploadActoin.class);
 
 	@RequestMapping(value = { "/image/view" })
-	public String getTempImage(HttpServletRequest request, HttpServletResponse response, String name) {
+	public String getTempImage(HttpServletRequest request, HttpServletResponse response, String name, Integer type) {
 		try {
-			response.getOutputStream().write(Files.readAllBytes(Paths.get("/upload/" + name)));
+			UploadFileTypeEnums typeEnum = null;
+			if (type != null && (typeEnum = UploadFileTypeEnums.getUploadFileType(type)) != null) {
+				response.getOutputStream()
+						.write(Files.readAllBytes(Paths.get("/data/" + typeEnum.getPath() + "/" + name)));
+			}
 		} catch (IOException e) {
 			LOG.error(String.format("view temporary file:%s got error:%s", name, e.getMessage()), e);
 		}
@@ -55,18 +61,22 @@ public class CommonUploadActoin {
 	}
 
 	@RequestMapping(value = { "/upload/user/icon" })
-	@ResponseBody
-	public String manage(HttpServletRequest request, HttpServletResponse response,
+	public ModelAndView manage(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam MultipartFile[] files) {
 		JSONArray result = new JSONArray();
+		ModelAndView modelAndView = new ModelAndView(new MappingJackson2JsonView());
 		if (files != null && files.length != 0) {
-			String realPath = "/upload";
+			String realPath = "/data/grocery-admin/tmp/";
+			File dir = new File(realPath);
+			if (!dir.exists())
+				dir.mkdirs();
 			for (MultipartFile file : files) {
 				String fullName = file.getOriginalFilename();
 				String name = FilenameUtils.getBaseName(fullName);
 				String ext = FilenameUtils.getExtension(fullName);
 				String savedName = System.currentTimeMillis() + StringUtils.substring(name, 0, 5)
 						+ FilenameUtils.EXTENSION_SEPARATOR_STR + ext;
+
 				InputStream ips = null;
 				// 这里不必处理IO流关闭的问题，因为FileUtils.copyInputStreamToFile()方法内部会自动把用到的IO流关掉，我是看它的源码才知道的
 				try {
@@ -92,7 +102,9 @@ public class CommonUploadActoin {
 				result.add(vo);
 			}
 		}
-		return result.toJSONString();
+		// return result.toJSONString();
+		modelAndView.addObject("pics", result);
+		return modelAndView;
 	}
 
 	/**

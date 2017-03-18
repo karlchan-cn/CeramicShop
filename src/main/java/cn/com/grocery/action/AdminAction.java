@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping(value = { "/admin/console/" })
-public class AdminAction implements InitializingBean {
+public class AdminAction extends BaseAction implements InitializingBean {
 	private static final Logger LOG = LoggerFactory.getLogger(AdminAction.class);
 
 	/**
@@ -44,7 +44,9 @@ public class AdminAction implements InitializingBean {
 				}
 			}
 		}).start();
-		ModelAndView mav = new ModelAndView("/admin/console/index");
+		// ModelAndView mav = new ModelAndView("/adminlte/console/index");
+		// ModelAndView mav = new ModelAndView("/adminlte/index");
+		ModelAndView mav = new ModelAndView("/adminlte/start");
 		return mav;
 	}
 

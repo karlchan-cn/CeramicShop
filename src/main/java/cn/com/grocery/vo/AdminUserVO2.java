@@ -121,7 +121,6 @@ public class AdminUserVO2 {
 	public void initFromUser(AdminUser user) {
 		this.id = user.getId();
 		this.groupId = user.getGroupId();
-		userName = user.getUserName();
 		displayName = user.getDisplayName();
 		password = user.getPassword();
 		email = user.getEmail();

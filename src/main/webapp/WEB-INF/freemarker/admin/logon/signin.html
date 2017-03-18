@@ -35,17 +35,17 @@
 	<div class="container">
 
 		<form class="form-signin" method="POST" action="/admin/login">
-			<h2 class="form-signin-heading">Please sign in</h2>
+			<h2 class="form-signin-heading">请登录</h2>
 			<input type="hidden" name="redirect" value="${redirect}">
-			<label class="sr-only" for="inputEmail">Email address</label> <input
-				 name="userName" autofocus="" required="" placeholder="Email address"
+			<label class="sr-only" for="inputEmail">邮箱</label> <input
+				 name="email" autofocus="" required="" placeholder="Email address"
 				class="form-control" id="inputEmail"> <label class="sr-only"
-				for="inputPassword">Password</label> <input type="password"
+				for="inputPassword">密码</label> <input type="password"
 				required="" placeholder="Password" name="password" class="form-control"
 				id="inputPassword">
 			<div class="checkbox">
 				<label> <input type="checkbox" value="remember-me">
-					Remember me
+					记住我
 				</label>
 			</div>
 			<button type="submit" class="btn btn-lg btn-primary btn-block">Sign
@@ -53,12 +53,9 @@
 		</form>
 
 	</div>
-	<!-- /container -->
-
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 	<!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
-
 
 </body>
 </html>

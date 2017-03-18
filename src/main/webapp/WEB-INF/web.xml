@@ -89,8 +89,16 @@
 	<welcome-file-list>
 		<welcome-file>/index</welcome-file>
 	</welcome-file-list>
-	<!-- <error-page>
+	<error-page>
 		<error-code>404</error-code>
-		<location>/WEB-INF/pages/error_all.jsp</location>
-	</error-page> -->
+		<location>/404</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/404</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/404</location>
+	</error-page> 
 </web-app>

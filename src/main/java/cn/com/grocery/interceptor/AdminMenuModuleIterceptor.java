@@ -29,8 +29,11 @@ public class AdminMenuModuleIterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		String uri = request.getRequestURI();
 		String moduleName = "default";
-		if (uri.indexOf("admin/console/user") > 0) {
+		if (uri.indexOf("admin/console/user") >= 0) {
 			moduleName = "user";
+		} 
+		if (uri.indexOf("admin/console/user/add") >= 0) {
+			moduleName = "user-add";
 		}
 		request.setAttribute(CONST_REQ_PARAM_ADMIN_MENU_MODULE, moduleName);
 		return super.preHandle(request, response, handler);

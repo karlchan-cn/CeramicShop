@@ -5,13 +5,13 @@
 	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/util
-        http://www.springframework.org/schema/util/spring-util-3.1.xsd
+        http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/beans 
-        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<context:component-scan base-package="cn.com.grocery.action">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
@@ -19,8 +19,8 @@
 	<!-- 自动注册 validator conversionService -->
 
 	<!-- annotation-driven的所有展开元素 -->
-	<mvc:annotation-driven />
-	
+	<mvc:annotation-driven validator="hibernateBeanValidator" />
+
 	<!-- 以下 validator ConversionService 在使用 mvc:annotation-driven 会 自动注册 -->
 	<bean id="hibernateBeanValidator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
@@ -31,20 +31,11 @@
 	<bean id="conversion-service"
 		class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
 
-	<bean
-		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<ref bean="byteArray_hmc" />
-				<ref bean="string_hmc" />
-				<ref bean="resource_hmc" />
-				<ref bean="source_hmc" />
-				<ref bean="xmlAwareForm_hmc" />
-				<ref bean="jaxb2RootElement_hmc" />
-				<ref bean="jackson_hmc" />
-			</list>
-		</property>
-	</bean>
+	<!-- <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"> 
+		<property name="messageConverters"> <list> <ref bean="byteArray_hmc" /> <ref 
+		bean="string_hmc" /> <ref bean="resource_hmc" /> <ref bean="source_hmc" /> 
+		<ref bean="xmlAwareForm_hmc" /> <ref bean="jaxb2RootElement_hmc" /> <ref 
+		bean="jackson_hmc" /> </list> </property> </bean> -->
 	<bean id="byteArray_hmc"
 		class="org.springframework.http.converter.ByteArrayHttpMessageConverter" /><!-- 
 		处理.. -->
@@ -108,15 +99,25 @@
 	<!-- 当在web.xml 中 DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
 	<mvc:default-servlet-handler />
 	<!-- 静态资源映射 -->
-	<mvc:resources mapping="/assets/images/**"
-		location="/WEB-INF/assets/images/,/WEB-INF/assets/images/bootstrap/,/WEB-INF/assets/images/base/,/WEB-INF/assets/upload/images/,/WEB-INF/assets/images/datatables/" />
 	<mvc:resources mapping="/assets/css/**"
-		location="/WEB-INF/assets/css/,/WEB-INF/assets/css/bootstrap/,/WEB-INF/assets/css/common/,
-		/WEB-INF/assets/css/login/" />
-	<mvc:resources mapping="/assets/fonts/**" location="/WEB-INF/assets/css/fonts/" />
+		location="/WEB-INF/assets/adminlte/css/,/WEB-INF/assets/css/,/WEB-INF/assets/css/bootstrap/,/WEB-INF/assets/css/common/,
+		/WEB-INF/assets/css/login/">
+		<mvc:cache-control max-age="3600" cache-public="true" />
+	</mvc:resources>
+	<mvc:resources mapping="/assets/fonts/**" location="/WEB-INF/assets/css/fonts/">
+		<mvc:cache-control max-age="3600" cache-public="true" />
+	</mvc:resources>
 	<mvc:resources mapping="/assets/js/**"
-		location="/WEB-INF/assets/js/,/WEB-INF/assets/js/bootstrap/,/WEB-INF/assets/js/jquery/,/WEB-INF/assets/js/fileupload/,/WEB-INF/assets/js/sugar/,/WEB-INF/assets/js/common/,WEB-INF/assets/js/modernizr/,WEB-INF/assets/js/dropzone/,WEB-INF/assets/js/datatables/" />
-	<mvc:resources mapping="/assets/ico/**" location="/WEB-INF/assets/ico/" />
+		location="/WEB-INF/assets/plugins/,/WEB-INF/assets/adminlte/js/,/WEB-INF/assets/js/,/WEB-INF/assets/js/bootstrap/,/WEB-INF/assets/js/jquery/,/WEB-INF/assets/js/fileupload/,/WEB-INF/assets/js/sugar/,/WEB-INF/assets/js/common/,WEB-INF/assets/js/modernizr/,WEB-INF/assets/js/dropzone/,WEB-INF/assets/js/datatables/">
+		<mvc:cache-control max-age="3600" cache-public="true" />
+	</mvc:resources>
+	<mvc:resources mapping="/assets/ico/**" location="/WEB-INF/assets/ico/">
+		<mvc:cache-control max-age="3600" cache-public="true" />
+	</mvc:resources>
+	<mvc:resources mapping="/assets/images/**"
+		location="/WEB-INF/assets/adminlte/img/,/WEB-INF/assets/images/,/WEB-INF/assets/images/bootstrap/,/WEB-INF/assets/images/base/,/WEB-INF/assets/upload/images/,/WEB-INF/assets/images/datatables/">
+		<mvc:cache-control max-age="3600" cache-public="true" />
+	</mvc:resources>
 
 
 	<bean id="freemarkerViewResolver"
@@ -133,7 +134,6 @@
 		<property name="exposeSpringMacroHelpers" value="true" />
 	</bean>
 	<!-- ========================= VIEW定义 ========================= -->
-
 
 	<!-- json view -->
 	<bean id="defaultJsonView"
@@ -170,7 +170,6 @@
 		class="cn.org.rapid_framework.freemarker.directive.OverrideDirective" />
 	<bean id="superDirective"
 		class="cn.org.rapid_framework.freemarker.directive.SuperDirective" />
-
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8" />
@@ -178,10 +177,6 @@
 		<property name="maxUploadSize" value="5000000" />
 	</bean>
 
-
-
-	<!-- 控制器异常处理 -->
-	<!-- <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"> 
-		<property name="exceptionMappings"> <props> <prop key="java.lang.Exception"> 
-		error_all </prop> </props> </property> </bean> -->
+	<mvc:view-controller path="/404" view-name="error_all" />
+	<mvc:view-controller path="/500" view-name="error_all" />
 </beans>

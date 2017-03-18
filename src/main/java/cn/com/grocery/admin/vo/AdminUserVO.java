@@ -20,25 +20,25 @@ public class AdminUserVO {
 
 	private Long id;
 
-	@NotNull()
-	@Length(max = 12, min = 1)
-	@JSONField(name = "user_name")
-	private String userName;
-
-	@NotNull
 	@JSONField(name = "display_name")
-	@Length(max = 10, min = 1)
+	@NotNull(message = "adminUserVO.displayName")
+	@Length(max = 10, min = 1, message = "adminUserVO.displayName")
 	private String displayName;
 
 	@JSONField(name = "group_id")
 	private Long groupId;
 
-	@NotNull
-	@Length(max = 30, min = 1)
+	@NotNull(message = "adminUserVO.password")
+	@Length(max = 15, min = 1, message = "adminUserVO.password")
 	private String password;
-	@Email()
-	@Length(max = 35, min = 1)
+
+	@Email(regexp = ".+\\@(qq|grocery)\\.com", message = "adminUserVO.email")
+	@Length(max = 35, min = 1, message = "adminUserVO.email")
 	private String email;
+
+	@NotNull(message = "adminUserVO.icon")
+	@Length(min = 1, message = "adminUserVO.icon")
+	private String icon;
 
 	private String phone;
 
@@ -52,8 +52,6 @@ public class AdminUserVO {
 		this.icon = icon;
 	}
 
-	private String icon;
-
 	@JSONField(name = "group_name")
 	private String groupName;
 
@@ -66,14 +64,6 @@ public class AdminUserVO {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getDisplayName() {
@@ -141,25 +131,23 @@ public class AdminUserVO {
 	}
 
 	public void initToUser(AdminUser user) {
-		user.setUserName(this.getUserName());
 		user.setDisplayName(this.getDisplayName());
 		user.setEmail(this.getEmail());
 		user.setPassword(this.getPassword());
 		user.setPhone(this.getPhone());
 		user.setCountry(this.getCountry());
-		user.getIcon();
+		user.setIcon(this.getIcon());
 	}
 
 	public void initFromUser(AdminUser user) {
-		this.id = user.getId();
-		this.groupId = user.getGroupId();
-		userName = user.getUserName();
+		id = user.getId();
+		groupId = user.getGroupId();
 		displayName = user.getDisplayName();
 		password = user.getPassword();
 		email = user.getEmail();
 		phone = user.getPhone();
 		country = user.getCountry();
-		setIcon(user.getIcon());
+		icon = user.getIcon();
 	}
 
 }
